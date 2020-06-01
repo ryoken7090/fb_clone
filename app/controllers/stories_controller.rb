@@ -6,6 +6,8 @@ class StoriesController < ApplicationController
   end
 
   def show
+    # binding.pry
+    @favorite = current_user.favorites.find_by(story_id: @story.id)
   end
 
   def new

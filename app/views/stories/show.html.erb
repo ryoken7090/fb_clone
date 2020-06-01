@@ -4,6 +4,12 @@
   <strong>Content:</strong>
   <%= @story.content %>
 </p>
-
+<% unless @story.user_id == current_user.id %>
+  <% if @favorite.present? %>
+    <%= link_to 'お気に入りを解除', favorite_path(id: @favorite.id), method: :delete ,class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to 'お気に入りに登録', favorites_path(story_id: @story.id), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
 <%= link_to 'Edit', edit_story_path(@story) %> |
 <%= link_to 'Back', stories_path %>
