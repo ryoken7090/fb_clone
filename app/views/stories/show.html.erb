@@ -4,6 +4,12 @@
   <strong>Content:</strong>
   <%= @story.content %>
 </p>
+<% if @story.image.present? %>
+  <p>
+    <strong>Image:</strong>
+    <%= image_tag @story.image.url %>
+  </p>
+<% end %>
 <% unless @story.user_id == current_user.id %>
   <% if @favorite.present? %>
     <%= link_to 'お気に入りを解除', favorite_path(id: @favorite.id), method: :delete ,class: 'btn btn-danger' %>
