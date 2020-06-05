@@ -1,13 +1,12 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
   before_action :user_logged_in?, only: %i(index show new edit destroy)
-  
+
   def index
     @stories = Story.all
   end
 
   def show
-    # binding.pry
     @favorite = current_user.favorites.find_by(story_id: @story.id)
   end
 
@@ -15,18 +14,27 @@ class StoriesController < ApplicationController
     @story = Story.new
   end
 
+  def confirm
+    @story = current_user.stories.build(story_params)
+    render :new if @story.invalid?
+  end
+
   def edit
   end
 
   def create
     @story = current_user.stories.build(story_params)
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render :show, status: :created, location: @story }
-      else
-        format.html { render :new }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
+    if params[:back]
+      render :new
+    else
+      respond_to do |format|
+        if @story.save
+          format.html { redirect_to @story, notice: 'Story was successfully created.' }
+          format.json { render :show, status: :created, location: @story }
+        else
+          format.html { render :new }
+          format.json { render json: @story.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

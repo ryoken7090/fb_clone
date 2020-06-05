@@ -1,17 +1,21 @@
 <p id="notice"><%= notice %></p>
-
   <tbody>
-    <% @stories.each do |story| %>
+    <% @stories.reverse_each do |story| %>
     <article>
       <div class="post">
         <ul>
-          <div class="user">
-            <li><%= story.user.name %></li>
+          <div class="prev">
+            <strong>
+              <li class="post_user"><%= story.user.name %></li>
+            </strong>
+            <small>
+              <li class="post_time"><%= story.created_at.strftime('%Y年%m月%d日 %k:%M') %></li>
+            </small>
           </div>
           <div class="contents">
-            <li><%= story.content %></li>
+            <li class="sentence"><%= story.content %></li>
             <% if story.image.present? %>
-              <li><%= image_tag story.image.url() %></li>
+              <li class="image"><%= image_tag story.image.url() %></li>
             <% end %>
           </div>
           <li><%= link_to 'Show', story %></li>

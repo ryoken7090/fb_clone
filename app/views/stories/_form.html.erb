@@ -1,4 +1,4 @@
-<%= form_with(model: story, local: true) do |form| %>
+<%= form_with(model: story, local: true, url: choose_new_or_edit) do |form| %>
   <% if story.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <li><%= form.label :content %></li>
+    <li><%= form.text_area :content %></li>
   </div>
   <div class="field">
   <%= form.label :image %>
