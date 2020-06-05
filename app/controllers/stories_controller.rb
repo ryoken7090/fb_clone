@@ -20,6 +20,9 @@ class StoriesController < ApplicationController
   end
 
   def edit
+    if @story.user != current_user
+      redirect_to stories_path
+    end
   end
 
   def create
@@ -52,6 +55,9 @@ class StoriesController < ApplicationController
   end
 
   def destroy
+    if @story.user != current_user
+      redirect_to stories_path
+    end
     @story.destroy
     respond_to do |format|
       format.html { redirect_to stories_url, notice: 'Story was successfully destroyed.' }
