@@ -10,13 +10,14 @@
     <%= image_tag @story.image.url %>
   </p>
 <% end %>
-<% unless @story.user_id == current_user.id %>
+<% if @story.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_story_path(@story), class: 'btn' %> |
+  <%= link_to 'Destroy', story_path, method: :delete, class: 'btn', data: { confirm: 'Are you sure?' } %> |
+<% else %>
   <% if @favorite.present? %>
     <%= link_to 'お気に入りを解除', favorite_path(id: @favorite.id), method: :delete ,class: 'btn' %> |
   <% else %>
     <%= link_to 'お気に入りに登録', favorites_path(story_id: @story.id), method: :post, class: 'btn' %> |
   <% end %>
 <% end %>
-<%= link_to 'Edit', edit_story_path(@story), class: 'btn' %> |
-<%= link_to 'Destroy', story_path, method: :delete, class: 'btn', data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', stories_path, class: 'btn' %>
