@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>FbClone</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>FbClone</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
+<body>
+  <header class="header">
+    <nav class="manu">
+      <ul class="row">
+        <div class="col-xs-4">
+          <li>
+          <div class="index">
+            <%= link_to "FbClone",stories_path %>
+          </div>
+          </li>
+        </div>
+        <div class="col-xs-offset-4 col-xs-4">
+          <% if logged_in? %>
+          <div class="row">
+            <li class="col-xs-4">
+              <%= link_to "Profile",user_path(current_user.id)%>
+            </li>
+            <li class="col-xs-4">
+              <%= link_to "Logout",session_path(current_user.id),method: :delete %>
+            </li>
+            <li class="col-xs-4">
+              <%= link_to 'New Story', new_story_path %>
+            </li>
+          </div>
+          <% else %>
+          <div class="row">
+            <li class="col-xs-6">
+              <%= link_to "Sign up", new_user_path %>
+            </li>
+            <li class="col-xs-6">
+              <%= link_to "Login", new_session_path %>
+            </li>
+          </div>
+          <% end %>
+        </div>
+      </ul>
+    </nav>
+  </header>
 
-    <%= link_to "index",stories_path %>
-    <% if logged_in? %>
-      <%= link_to "Profile",user_path(current_user.id)%>
-      <%= link_to "Logout",session_path(current_user.id),method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
-    <% end %>
-
+  <div class="container">
     <%= yield %>
-
-  </body>
+  </div>
+</body>
 </html>

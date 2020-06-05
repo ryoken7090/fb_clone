@@ -1,33 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Stories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>Content</th>
-      <th>image</th>
-      <th></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @stories.each do |story| %>
-      <tr>
-        <td><%= story.user.name %></td>
-        <td><%= story.content %></td>
-        <% if story.image.present? %>
-          <td><%= image_tag story.image.url(:thumb) %></td>
-        <% else %>
-        <td></td>
-        <% end %>
-        <td><%= link_to 'Show', story %></td>
-      </tr>
+    <article>
+      <div class="post">
+        <ul>
+          <div class="user">
+            <li><%= story.user.name %></li>
+          </div>
+          <div class="contents">
+            <li><%= story.content %></li>
+            <% if story.image.present? %>
+              <li><%= image_tag story.image.url() %></li>
+            <% end %>
+          </div>
+          <li><%= link_to 'Show', story %></li>
+        </ul>
+      </div>
+    </article>
     <% end %>
   </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Story', new_story_path %>

@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy]
-
+  before_action :user_logged_in?, only: %i(index show new edit destroy)
+  
   def index
     @stories = Story.all
   end
@@ -57,5 +58,11 @@ class StoriesController < ApplicationController
 
     def story_params
       params.require(:story).permit(:content, :image, :image_cache)
+    end
+
+    def user_logged_in?
+      unless current_user
+        redirect_to new_session_path
+      end
     end
 end
