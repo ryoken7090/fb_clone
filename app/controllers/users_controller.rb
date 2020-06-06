@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
+    # binding.pry
+    @stories = @user.stories.all
   end
 
 private
