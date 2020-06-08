@@ -9,45 +9,35 @@
 
 <body>
   <header class="header">
-    <nav class="manu">
-      <ul class="row">
-        <div class="col-xs-4">
-          <li>
-          <div class="index">
-            <%= link_to "FbClone",stories_path %>
-          </div>
-          </li>
-        </div>
-        <div class="col-xs-offset-4 col-xs-4">
-          <% if logged_in? %>
-          <div class="row">
-            <li class="col-xs-4">
-              <%= link_to "Profile",user_path(current_user.id)%>
-            </li>
-            <li class="col-xs-4">
-              <%= link_to "Logout",session_path(current_user.id),method: :delete %>
-            </li>
-            <li class="col-xs-4">
-              <%= link_to 'New Story', new_story_path %>
-            </li>
-          </div>
-          <% else %>
-          <div class="row">
-            <li class="col-xs-6">
-              <%= link_to "Sign up", new_user_path %>
-            </li>
-            <li class="col-xs-6">
-              <%= link_to "Login", new_session_path %>
-            </li>
-          </div>
-          <% end %>
-        </div>
-      </ul>
-    </nav>
+  <nav class="menu">
+
+    <%= link_to "FbClone",stories_path, {class: "menu-top"} %>
+
+    <% if logged_in? %>
+    <ul class="menu_light clearfix">
+      <li>
+        <%= link_to 'New Story', new_story_path %>
+      </li>
+      <li>
+        <%= link_to "Profile",user_path(current_user.id)%>
+      </li>
+      <li>
+        <%= link_to "Logout",session_path(current_user.id),method: :delete %>
+      </li>
+    </ul>
+    <% else %>
+    <ul class="menu_light clearfix">
+      <li>
+        <%= link_to "Sign up", new_user_path %>
+      </li>
+      <li>
+        <%= link_to "Login", new_session_path %>
+      </li>
+    </ul>
+    <% end %>
+  </nav>
   </header>
 
-  <div class="container">
     <%= yield %>
-  </div>
 </body>
 </html>

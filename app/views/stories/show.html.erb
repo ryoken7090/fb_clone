@@ -1,23 +1,25 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <%= @story.user.name %>
-</p>
-<p>
-  <%= @story.content %>
-</p>
-<% if @story.image.present? %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
   <p>
-    <%= image_tag @story.image.url %>
+    <%= @story.user.name %>
   </p>
-<% end %>
-<% if @story.user_id == current_user.id %>
-  <%= link_to 'Edit', edit_story_path(@story), class: 'btn' %> |
-  <%= link_to 'Destroy', story_path, method: :delete, class: 'btn', data: { confirm: 'Are you sure?' } %> |
-<% else %>
-  <% if @favorite.present? %>
-    <%= link_to 'お気に入りを解除', favorite_path(id: @favorite.id), method: :delete ,class: 'btn' %> |
-  <% else %>
-    <%= link_to 'お気に入りに登録', favorites_path(story_id: @story.id), method: :post, class: 'btn' %> |
+  <p>
+    <%= @story.content %>
+  </p>
+  <% if @story.image.present? %>
+    <p>
+      <%= image_tag @story.image.url %>
+    </p>
+    <% end %>
+    <% if @story.user_id == current_user.id %>
+      <%= link_to 'Edit', edit_story_path(@story), class: 'btn' %> |
+      <%= link_to 'Destroy', story_path, method: :delete, class: 'btn', data: { confirm: '削除してよろしいですか？' } %> |
+    <% else %>
+      <% if @favorite.present? %>
+        <%= link_to 'お気に入りを解除', favorite_path(id: @favorite.id), method: :delete ,class: 'btn' %> |
+        <% else %>
+        <%= link_to 'お気に入りに登録', favorites_path(story_id: @story.id), method: :post, class: 'btn' %> |
+        <% end %>
   <% end %>
-<% end %>
-<%= link_to 'Back', stories_path, class: 'btn' %>
+  <%= link_to 'Back', stories_path, class: 'btn' %>
+</div>

@@ -1,9 +1,11 @@
-<h3>以下の内容で、送信する。</h3>
-<%= form_with(model: @story, url: stories_path, local: true) do |form| %>
-  <%= form.hidden_field :content %>
-  <p><%= @story.content %></p>
-  <%= image_tag(@story.image.url) if @story.image && @story.image.url %>
-  <%= form.hidden_field :image_cache %>
-  <%= form.submit  "submit" %>
-  <%= form.submit "戻る", name: 'back' %>
-<% end %>
+<div class="container">
+  <h3>以下の内容で、送信する。</h3>
+  <%= form_with(model: @story, url: stories_path, local: true) do |form| %>
+    <%= form.hidden_field :content %>
+    <p><%= @story.content %></p>
+    <%= image_tag(@story.image.url) if @story.image && @story.image.url %>
+    <%= form.hidden_field :image_cache %>
+    <%= form.submit  "送信" %>
+    <%= form.submit "戻る", name: 'back' %>
+  <% end %>
+</div>

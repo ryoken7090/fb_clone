@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
   <tbody>
     <% @stories.reverse_each do |story| %>
     <article>
@@ -6,7 +7,7 @@
         <ul>
           <div class="prev">
             <strong>
-              <li class="post_user"><%= story.user.name %></li>
+              <li class="post_user"><%= link_to story.user.name, user_path(story.user.id) %></li>
             </strong>
             <small>
               <li class="post_time"><%= story.created_at.strftime('%Y年%m月%d日 %k:%M') %></li>
@@ -24,3 +25,4 @@
     </article>
     <% end %>
   </tbody>
+  </div>

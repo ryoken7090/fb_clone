@@ -1,19 +1,18 @@
 <%= form_with(model: story, local: true, url: choose_new_or_edit) do |form| %>
-  <% if story.errors.any? %>
+  <% if @story.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
-
+      <h2><%= @story.errors.count %>件のエラーがあります。</h2>
       <ul>
-      <% story.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @story.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
 
   <div class="field">
     <li><%= form.label :content %></li>
-    <li><%= form.text_area :content %></li>
+    <li><%= form.text_area :content, size: "40x10" %></li>
   </div>
   <div class="field">
   <%= form.label :image %>
