@@ -5,7 +5,9 @@
     <p><%= @story.content %></p>
     <%= image_tag(@story.image.url) if @story.image && @story.image.url %>
     <%= form.hidden_field :image_cache %>
-    <%= form.submit  "送信" %>
-    <%= form.submit "戻る", name: 'back' %>
+    <ul class="list-inline">
+      <li><%= form.submit  "送信" %></li>
+      <li><%= form.submit "戻る", name: 'back' %></li>
+    </ul>
   <% end %>
 </div>
